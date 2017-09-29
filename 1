@@ -42,19 +42,10 @@
 #
 # Copyright 2017 Your name here, unless otherwise noted.
 #
-class ssh(
-  Boolean $permitrootlogin = $::ssh::params::permitrootlogin,
-  Integer $port            = $::ssh::params::port,
-  String $package_name     = $::ssh::params::package_name,
-  String $service_name     = $::ssh::params::service_name,
-) inherits ::ssh::params {
+class ssh {
 
-  notify {"package= $::ssh::params::package_name  service=$::ssh::params::service_name": }
-  
-  class{'::ssh::install': }
-  class{'::ssh::config': }
-  class{'::ssh::service': }
-
-  Class['::ssh::install'] -> Class['::ssh::config'] ~> Class['::ssh::service']
+notify {'hello Node classifier': }
+  class{'ssh::install':}->
+  class{'ssh::service':}
 
 }
